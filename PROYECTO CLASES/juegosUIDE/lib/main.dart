@@ -1,54 +1,29 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  ThemeMode _themeMode = ThemeMode.light;
-
-  void _toggleTheme() {
-    setState(() {
-      _themeMode = _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Perfil Flutter',
       theme: ThemeData(
-        brightness: Brightness.light,
         fontFamily: 'Roboto',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        fontFamily: 'Roboto',
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple, brightness: Brightness.dark),
-        useMaterial3: true,
-      ),
-      themeMode: _themeMode,
-      home: MyHomePage(
-        title: 'Perfil de Madeleine Jimenez',
-        toggleTheme: _toggleTheme,
-      ),
+      home: const MyHomePage(title: 'Perfil de Madeleine Jimenez'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title, required this.toggleTheme});
+  const MyHomePage({super.key, required this.title});
   final String title;
-  final VoidCallback toggleTheme;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -88,24 +63,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).brightness == Brightness.light
-          ? const Color(0xFFF6F4FF)
-          : Colors.black,
+      backgroundColor: const Color(0xFFF6F4FF),
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Theme.of(context).brightness == Brightness.light
-            ? const Color(0xFFBDA8F3)
-            : Colors.grey[900],
+        backgroundColor: const Color(0xFFBDA8F3),
         foregroundColor: Colors.white,
         centerTitle: true,
         elevation: 3,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.brightness_6),
-            onPressed: widget.toggleTheme,
-            tooltip: 'Cambiar tema',
-          ),
-        ],
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -125,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 elevation: 5,
-                color: Theme.of(context).cardColor,
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
                   child: Column(
@@ -181,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-// Segunda pantalla sin cambios
+// Segunda pantalla con botones que cambian de color
 class SecondPage extends StatefulWidget {
   const SecondPage({super.key});
 
@@ -226,13 +190,9 @@ class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).brightness == Brightness.light
-          ? const Color(0xFFF9F9FF)
-          : Colors.black,
+      backgroundColor: const Color(0xFFF9F9FF),
       appBar: AppBar(
-        backgroundColor: Theme.of(context).brightness == Brightness.light
-            ? const Color(0xFF7A9BFF)
-            : Colors.grey[900],
+        backgroundColor: const Color(0xFF7A9BFF),
         foregroundColor: Colors.white,
         title: const Text('Detalles adicionales'),
         centerTitle: true,
@@ -298,7 +258,8 @@ class _SecondPageState extends State<SecondPage> {
               label: const Text('Volver'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: _buttonColors[_backBtnColorIndex],
-                foregroundColor: Colors.white,             ),
+                foregroundColor: Colors.white,
+              ),
             ),
           ],
         ),
