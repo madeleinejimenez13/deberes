@@ -1,0 +1,34 @@
+[
+    {
+    "nombre": "Galapagos",
+    "pais": "Ecuador ",
+    "precio": 2500,
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Pinta_Island_Tortoise_Lonesome_George_2008.jpg/500px-Pinta_Island_Tortoise_Lonesome_George_2008.jpg"
+  },
+  {
+    "nombre": "París",
+    "pais": "Francia",
+    "precio": 1200,
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/8/85/Par%C3%ADs%2C_Francia.jpg"
+  },
+  {
+    "nombre": "Tokio",
+    "pais": "Japón",
+    "precio": 1500,
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Temple_Complex_at_Asakusa_Kannon_%2811920461243%29.jpg/1024px-Temple_Complex_at_Asakusa_Kannon_%2811920461243%29.jpg"
+  }
+  ,
+   {
+    "nombre": "Nueva York",
+    "pais": "Estados Unidos",
+    "precio": 1800,
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/4/45/Liberty02.jpg"
+  },
+  {
+    "nombre": "Roma",
+    "pais": "Italia",
+    "precio": 1400,
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Panoramic_photograph_of_interior_of_Colosseum.jpg/1024px-Panoramic_photograph_of_interior_of_Colosseum.jpg"
+  }
+  
+]
