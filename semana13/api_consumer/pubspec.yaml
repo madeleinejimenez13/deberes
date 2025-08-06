@@ -1,0 +1,21 @@
+name: uide_api_rest
+description: Proyecto de consumo de API REST - UIDE
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^5.4.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  mockito: ^5.4.3  # Añade esta línea
+  test: ^1.24.0  
+
+flutter:
+  uses-material-design: true

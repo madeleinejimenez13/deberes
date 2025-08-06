@@ -1,38 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="$FLUTTER_BASE_HREF">
-
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="todo_app_notifications">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
-
-  <title>todo_app_notifications</title>
-  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notificaciones - Torneo Fútbol</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
+    .notif { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .empty { color: #777; font-style: italic; }
+  </style>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+  <h1>🔔 Notificaciones del Torneo</h1>
+  <div id="lista">Cargando...</div>
+
+  <!-- Firebase SDK (versión compat para web fácil) -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.8/firebase-database-compat.js"></script>
+
+  <script>
+    // 🔥 COPIA TU CONFIGURACIÓN DE FIREBASE AQUÍ
+    const firebaseConfig = {
+      apiKey: "TU_API_KEY",
+      authDomain: "TU-PROYECTO.firebaseapp.com",
+      databaseURL: "https://TU-PROYECTO-default-rtdb.firebaseio.com",
+      projectId: "TU-PROYECTO",
+      storageBucket: "TU-PROYECTO.appspot.com",
+      messagingSenderId: "123456789012",
+      appId: "1:123456789012:web:abcdef123456"
+    };
+
+    // Inicializar Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const notifRef = db.ref("torneo/notificaciones");
+    const lista = document.getElementById("lista");
+
+    // Escuchar nuevas notificaciones
+    notifRef.on("child_added", (snapshot) => {
+      const data = snapshot.val();
+      const div = document.createElement("div");
+      div.className = "notif";
+      div.innerHTML = `
+        <strong>${data.title || "Sin título"}</strong><br>
+        <small>${new Date(data.timestamp).toLocaleString()}</small><br>
+        <p>${data.body || "Sin mensaje"}</p>
+      `;
+      lista.appendChild(div);
+    });
+
+    // Si no hay notificaciones
+    notifRef.once("value", (snapshot) => {
+      if (snapshot.val() === null) {
+        lista.innerHTML = "<p class='empty'>No hay notificaciones aún.</p>";
+      }
+    });
+  </script>
 </body>
 </html>
